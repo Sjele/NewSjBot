@@ -11,7 +11,7 @@ import org.pircbotx.hooks.Listener;
 
 import com.google.common.eventbus.EventBus;
 
-import sjbot.commands.test;
+import sjbot.commands.coreCommands;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,8 +25,9 @@ public class SjBot extends PircBotX{
     private String service;
     private String channel;
     private String owner;
+    private static String prefix;
 
-    public PircBotX bot;
+    public static PircBotX bot;
 
     public String[] channels;
 
@@ -51,8 +52,9 @@ public class SjBot extends PircBotX{
                 prop.setProperty("service", "irc.esper.net");
                 prop.setProperty("channel", "#ccbots");
                 prop.setProperty("owner", "Sjele");
+                prop.setProperty("prefix", "<>");
 
-                prop.store(new FileOutputStream("config/mainConfig.properties"),null);
+                prop.store(new FileOutputStream("config/mainConfig.properties"), null);
 
                 System.out.println("The bot recommends you to go edit mainConfig!");
             }catch(IOException e) {
@@ -67,6 +69,8 @@ public class SjBot extends PircBotX{
             service = prop.getProperty("service");
             channel = prop.getProperty("channel");
             owner = prop.getProperty("owner");
+            prefix = prop.getProperty("prefix");
+
 
             System.out.println("Loaded config!");
 
@@ -95,6 +99,14 @@ public class SjBot extends PircBotX{
         }catch(Exception e) {
             e.printStackTrace();
         }
-        eventBus.register(new test());
+        eventBus.register(new coreCommands());
+    }
+
+    public String getOwner(){
+        return owner;
+    }
+
+    public static String getPrefix() {
+        return prefix;
     }
 }
