@@ -1,4 +1,4 @@
-package SjBot;
+package sjbot;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +7,7 @@ package SjBot;
  * Time: 19:54
  */
 
-import SjBot.core.SjBot;
+import sjbot.core.SjBot;
 
 public class Main {
 

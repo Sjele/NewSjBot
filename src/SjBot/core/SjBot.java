@@ -1,4 +1,4 @@
-package SjBot.core; /**
+package sjbot.core; /**
  * Created with IntelliJ IDEA.
  * User: Sjele
  * Date: 10.05.13
@@ -11,13 +11,13 @@ import org.pircbotx.hooks.Listener;
 
 import com.google.common.eventbus.EventBus;
 
+import sjbot.commands.test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import SjBot.commands.*;
 
 public class SjBot extends PircBotX{
 
@@ -47,7 +47,7 @@ public class SjBot extends PircBotX{
         if (! new File("config/mainConfig.properties").exists()) {
 
             try {
-                prop.setProperty("botname", "SjBot");
+                prop.setProperty("botname", "sjbot");
                 prop.setProperty("service", "irc.esper.net");
                 prop.setProperty("channel", "#ccbots");
                 prop.setProperty("owner", "Sjele");
@@ -76,7 +76,7 @@ public class SjBot extends PircBotX{
     }
 
     public void run() {
-        System.out.println("Started SjBot!");
+        System.out.println("Started sjbot!");
 
         bot = new PircBotX();
 
@@ -95,6 +95,6 @@ public class SjBot extends PircBotX{
         }catch(Exception e) {
             e.printStackTrace();
         }
-
+        eventBus.register(new test());
     }
 }
