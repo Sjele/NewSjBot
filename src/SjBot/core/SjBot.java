@@ -11,7 +11,11 @@ import org.pircbotx.hooks.Listener;
 
 import com.google.common.eventbus.EventBus;
 
+import sjbot.api.pluginRegistry;
 import sjbot.commands.coreCommands;
+import sjbot.commands.otherCommands;
+import sjbot.event.eventHandler;
+import sjbot.permission.PermissionManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,14 +28,14 @@ public class SjBot extends PircBotX{
     private String botname;
     private String service;
     private String channel;
-    private String owner;
+    private static String owner;
     private static String prefix;
 
     public static PircBotX bot;
 
     public String[] channels;
 
-    public EventBus eventBus;
+    public static EventBus eventBus;
 
     public SjBot() {
 
@@ -100,9 +104,17 @@ public class SjBot extends PircBotX{
             e.printStackTrace();
         }
         eventBus.register(new coreCommands());
+        eventBus.register(new otherCommands());
+        eventBus.register(new eventHandler());
+
+        PermissionManager.addPerm(owner, "o+");
+        PermissionManager.addDefault();
+
+        pluginRegistry.registerPluginClass(sjbot.commands.test.class);
+        pluginRegistry.registerPluginClass(sjbot.commands.coreCommands.class);
     }
 
-    public String getOwner(){
+    public static String getOwner(){
         return owner;
     }
 
